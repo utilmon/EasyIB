@@ -1,7 +1,7 @@
 # EasyIB: Interactive Brokers API
 [![](https://img.shields.io/pypi/v/easyib.svg)](https://pypi.org/pypi/easyib/)
-[![](https://img.shields.io/pypi/pyversions/easygib.svg)](https://pypi.org/pypi/easyib/)
-[![](https://img.shields.io/pypi/l/easygib.svg)](https://pypi.org/pypi/easyib/)
+[![](https://img.shields.io/pypi/pyversions/easyib.svg)](https://pypi.org/pypi/easyib/)
+[![](https://img.shields.io/pypi/l/easyib.svg)](https://pypi.org/pypi/easyib/)
 
 EasyIB is a python wrapper for [Interactive Brokers Client Portal Web API](https://interactivebrokers.github.io/cpwebapi/).
 
