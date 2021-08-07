@@ -42,7 +42,7 @@ class REST:
         dic = {}
         for item in response.json():
             dic.update({item["contractDesc"]: item["position"]})
-        dic.update({"USD": self.get_cash()}) # Cash balance
+        dic.update({"USD": self.get_cash()})  # Cash balance
         return dic
 
     def reply_yes(self, id: str) -> dict:
@@ -54,10 +54,10 @@ class REST:
         )
         return response.json()[0]
 
-    def submit_order(self, request: dict, reply_yes=True) -> dict:
+    def submit_orders(self, list_of_orders: list, reply_yes=True) -> dict:
         response = requests.post(
             self.url + "iserver/account/" + self.id + "/orders",
-            json=request,
+            json={"orders": list_of_orders},
             verify=self.ssl,
         )
         dic = response.json()[0]
@@ -84,6 +84,24 @@ class REST:
             verify=self.ssl,
         )
         return response.json()
+
+    def modify_order(self, orderId="default", order={}, reply_yes=True) -> dict:
+        assert (
+            orderId != "default" and order != {}
+        ), "Input parameters (orderId or order) are missing"
+
+        response = requests.post(
+            self.url + "iserver/account/" + self.id + "/order/" + str(orderId),
+            json=order,
+            verify=self.ssl,
+        )
+        dic = response.json()[0]
+        if reply_yes:
+            while "order_id" not in dic.keys():
+                print("Answering yes to ...")
+                print(dic["message"])
+                dic = self.reply_yes(dic["id"])
+        return dic
 
     def ping_server(self) -> dict:
         response = requests.post(self.url + "tickle", verify=self.ssl)
@@ -118,22 +136,23 @@ if __name__ == "__main__":
     api = REST()
 
     # print(api.reply_yes("a37bcc93-736b-441b-88a3-ee291d5dbcbd"))
-    request = {
-        "orders": [
-            {
-                "conid": api.get_conid("AAPL"),
-                "orderType": "MKT",
-                "side": "BUY",
-                "quantity": 5,
-                "tif": "GTC",
-            }
-        ]
-    }
-    # print(api.submit_order(request))
-    print(api.get_portfolio())
+    orders = [
+        {
+            "conid": api.get_conid("AAPL"),
+            "orderType": "MKT",
+            "side": "BUY",
+            "quantity": 7,
+            "tif": "GTC",
+        }
+    ]
+
+    # print(api.submit_order(orders))
+    print(api.modify_order(1258176643, orders[0]))
+    # print(api.get_order(1258176642))
+    # print(api.get_portfolio())
     # print(api.re_authenticate())
     # print(api.get_auth_status())
-    # print(api.get_order(2027388848))
+    # print(api.get_live_orders())
     # print(api.get_bars("TSLA"))
     # print(api.get_conid("AAPL"))
     # print(api.cancel_order(2027388848))
