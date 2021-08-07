@@ -83,8 +83,12 @@ class REST:
         )
         return response.json()
 
-    def get_live_orders(self) -> dict:
-        response = requests.get(self.url + "iserver/account/orders", verify=self.ssl)
+    def get_live_orders(self, filters=[]) -> dict:
+        response = requests.get(
+            self.url + "iserver/account/orders",
+            params={"filters": filters},
+            verify=self.ssl,
+        )
         return response.json()
 
     def cancel_order(self, orderId: str) -> dict:
@@ -150,12 +154,12 @@ if __name__ == "__main__":
     ]
 
     # print(api.submit_order(orders))
-    print(api.modify_order(1258176643, orders[0]))
+    # print(api.modify_order(1258176643, orders[0]))
     # print(api.get_order(1258176642))
     # print(api.get_portfolio())
     # print(api.re_authenticate())
     # print(api.get_auth_status())
-    # print(api.get_live_orders())
+    print(api.get_live_orders())
     # print(api.get_bars("TSLA"))
     # print(api.get_conid("AAPL"))
     # print(api.cancel_order(2027388848))
