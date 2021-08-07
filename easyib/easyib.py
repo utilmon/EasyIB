@@ -46,6 +46,9 @@ class REST:
         return dic
 
     def reply_yes(self, id: str) -> dict:
+        """
+        Replies yes to a single message generated while submitting or modifying orders.
+        """
         answer = {"confirmed": True}
         response = requests.post(
             self.url + "iserver/reply/" + id,
@@ -54,19 +57,25 @@ class REST:
         )
         return response.json()[0]
 
+    def reply_all_yes(self, response, reply_yes_to_all: bool):
+        """
+        Replies yes to consecutive messages generated while submitting or modifying orders.
+        """
+        dic = response.json()[0]
+        if reply_yes_to_all:
+            while "order_id" not in dic.keys():
+                print("Answering yes to ...")
+                print(dic["message"])
+                dic = self.reply_yes(dic["id"])
+        return dic
+
     def submit_orders(self, list_of_orders: list, reply_yes=True) -> dict:
         response = requests.post(
             self.url + "iserver/account/" + self.id + "/orders",
             json={"orders": list_of_orders},
             verify=self.ssl,
         )
-        dic = response.json()[0]
-        if reply_yes:
-            while "order_id" not in dic.keys():
-                print("Answering yes to ...")
-                print(dic["message"])
-                dic = self.reply_yes(dic["id"])
-        return dic
+        return self.reply_all_yes(response, reply_yes)
 
     def get_order(self, orderId: str) -> dict:
         response = requests.get(
@@ -95,13 +104,7 @@ class REST:
             json=order,
             verify=self.ssl,
         )
-        dic = response.json()[0]
-        if reply_yes:
-            while "order_id" not in dic.keys():
-                print("Answering yes to ...")
-                print(dic["message"])
-                dic = self.reply_yes(dic["id"])
-        return dic
+        return self.reply_all_yes(response, reply_yes)
 
     def ping_server(self) -> dict:
         response = requests.post(self.url + "tickle", verify=self.ssl)
