@@ -57,7 +57,7 @@ class REST:
         )
         return response.json()[0]
 
-    def reply_all_yes(self, response, reply_yes_to_all: bool):
+    def reply_all_yes(self, response, reply_yes_to_all: bool) -> dict:
         """
         Replies yes to consecutive messages generated while submitting or modifying orders.
         """
