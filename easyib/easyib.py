@@ -42,6 +42,7 @@ class REST:
         dic = {}
         for item in response.json():
             dic.update({item["contractDesc"]: item["position"]})
+        dic.update({"USD": self.get_cash()}) # Cash item
         return dic
 
     def reply_yes(self, id: str) -> dict:
@@ -128,8 +129,8 @@ if __name__ == "__main__":
             }
         ]
     }
-    print(api.submit_order(request))
-    # print(api.get_portfolio())
+    # print(api.submit_order(request))
+    print(api.get_portfolio())
     # print(api.re_authenticate())
     # print(api.get_auth_status())
     # print(api.get_order(2027388848))
