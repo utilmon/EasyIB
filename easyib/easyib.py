@@ -42,7 +42,7 @@ class REST:
         dic = {}
         for item in response.json():
             dic.update({item["contractDesc"]: item["position"]})
-        dic.update({"USD": self.get_cash()}) # Cash item
+        dic.update({"USD": self.get_cash()}) # Cash balance
         return dic
 
     def reply_yes(self, id: str) -> dict:
