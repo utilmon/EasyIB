@@ -25,7 +25,7 @@ print(bars)
 
 ### Submitting an order
 ```python
-orders = [
+list_of_orders = [
     {
         "conid": api.get_conid("AAPL"),
         "orderType": "MKT",
@@ -35,5 +35,5 @@ orders = [
     }
 ]
 
-api.submit_orders(orders)
+api.submit_orders(list_of_orders)
 ```
