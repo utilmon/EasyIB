@@ -27,7 +27,7 @@ Notable functionality includes:
 
 How to install
 --------------
-.. code-block:: python
+.. code-block:: bash
 
     pip install easyib
 
