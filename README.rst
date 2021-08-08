@@ -71,7 +71,7 @@ Reference
 -------------
 REST
 ^^^^^
-By default, EasyIB assumes the gateway session is open at "https://localhost:5000" withtout a SSL certificate. A custom url and SSL certificate can be set by:
+By default, EasyIB assumes the gateway session is open at https://localhost:5000 withtout a SSL certificate. A custom url and SSL certificate can be set by:
 
 .. code-block:: python
 
