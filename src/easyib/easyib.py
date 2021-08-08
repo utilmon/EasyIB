@@ -6,11 +6,18 @@ class REST:
 
         self.url = url + "/v1/api/"
         self.ssl = ssl
-        self.id = self.get_accountid()
+        self.id = self.get_account()[0]["accountId"]
 
-    def get_accountid(self) -> str:
+    def get_account(self) -> list:
         response = requests.get(self.url + "portfolio/accounts", verify=self.ssl)
-        return response.json()[0]["accountId"]
+        return response.json()
+
+    def switch_account(self, accountId: str) -> dict:
+        response = requests.post(
+            self.url + "iserver/account", json={"acctId": accountId}, verify=self.ssl
+        )
+        self.id = accountId
+        return response.json()
 
     def get_cash(self) -> float:
         response = requests.get(
@@ -98,9 +105,9 @@ class REST:
         )
         return response.json()
 
-    def modify_order(self, orderId="default", order={}, reply_yes=True) -> dict:
+    def modify_order(self, orderId=None, order=None, reply_yes=True) -> dict:
         assert (
-            orderId != "default" and order != {}
+            orderId != None and order != None
         ), "Input parameters (orderId or order) are missing"
 
         response = requests.post(
