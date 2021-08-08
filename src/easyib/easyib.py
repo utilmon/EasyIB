@@ -6,9 +6,9 @@ class REST:
 
         self.url = url + "/v1/api/"
         self.ssl = ssl
-        self.id = self.get_account()[0]["accountId"]
+        self.id = self.get_accounts()[0]["accountId"]
 
-    def get_account(self) -> list:
+    def get_accounts(self) -> list:
         response = requests.get(self.url + "portfolio/accounts", verify=self.ssl)
         return response.json()
 

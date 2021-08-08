@@ -88,7 +88,7 @@ See the official documentation of the End Point at https://www.interactivebroker
    * - REST Method
      - End Point
      - Result
-   * - ``get_account()``
+   * - ``get_accounts()``
      - ``Get portfolio/accounts``
      - ``list``
    * - ``switch_account(accountId: str)``
