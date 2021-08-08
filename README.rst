@@ -79,6 +79,8 @@ By default, EasyIB assumes the gateway session is open at https://localhost:5000
 
 API REST Methods
 ^^^^^^^^^^^^^^^^^
+See the official documentation of the End Point at https://www.interactivebrokers.com/api/doc.html
+
 .. list-table:: 
    :widths: 50 50 25
    :header-rows: 1
