@@ -44,8 +44,6 @@ Historical data
     import easyib
 
     api = easyib.REST()
-    # By default, easyib assumes the gateway session is at local port 5000 without a ssl certificate
-    # A custom port may be set by `api = easyib.REST(url="https://localhost:5000", ssl=False)`
 
     bars = api.get_bars("AAPL", period="1w", bar="1d")
     print(bars)
@@ -63,6 +61,5 @@ Submitting an order
             "tif": "GTC",
         }
     ]
-    # For order parameters, see 'order request info' at https://www.interactivebrokers.com/api/doc.html#tag/Order/paths/~1iserver~1account~1{accountId}~1orders/post
-
+    
     api.submit_orders(list_of_orders)
