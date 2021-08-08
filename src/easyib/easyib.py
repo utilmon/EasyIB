@@ -64,7 +64,7 @@ class REST:
         )
         return response.json()[0]
 
-    def reply_all_yes(self, response, reply_yes_to_all: bool) -> dict:
+    def _reply_all_yes(self, response, reply_yes_to_all: bool) -> dict:
         """
         Replies yes to consecutive messages generated while submitting or modifying orders.
         """
@@ -82,7 +82,7 @@ class REST:
             json={"orders": list_of_orders},
             verify=self.ssl,
         )
-        return self.reply_all_yes(response, reply_yes)
+        return self._reply_all_yes(response, reply_yes)
 
     def get_order(self, orderId: str) -> dict:
         response = requests.get(
@@ -105,7 +105,9 @@ class REST:
         )
         return response.json()
 
-    def modify_order(self, orderId=None, order=None, reply_yes=True) -> dict:
+    def modify_order(
+        self, orderId: str = None, order: dict = None, reply_yes=True
+    ) -> dict:
         assert (
             orderId != None and order != None
         ), "Input parameters (orderId or order) are missing"
@@ -115,7 +117,7 @@ class REST:
             json=order,
             verify=self.ssl,
         )
-        return self.reply_all_yes(response, reply_yes)
+        return self._reply_all_yes(response, reply_yes)
 
     def ping_server(self) -> dict:
         response = requests.post(self.url + "tickle", verify=self.ssl)
