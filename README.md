@@ -45,7 +45,7 @@ list_of_orders = [
         "tif": "GTC",
     }
 ]
-# See 'order request info' at https://www.interactivebrokers.com/api/doc.html#tag/Order/paths/~1iserver~1account~1{accountId}~1orders/post for more order parameters
+# For order parameters, see 'order request info' at https://www.interactivebrokers.com/api/doc.html#tag/Order/paths/~1iserver~1account~1{accountId}~1orders/post
 
 api.submit_orders(list_of_orders)
 ```
