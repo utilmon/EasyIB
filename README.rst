@@ -11,8 +11,10 @@ EasyIB: Unofficial Wrapper for Interactive Brokers API
     :target: https://easyib.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-EasyIB is an unofficial python wrapper for `Interactive Brokers Client Portal Web API <https://interactivebrokers.github.io/cpwebapi/>`__.
-Notable functionality includes:
+
+|
+|   EasyIB is an unofficial python wrapper for `Interactive Brokers Client Portal Web API <https://interactivebrokers.github.io/cpwebapi/>`__.
+    Notable functionality includes:
 
 * Pull account info, portfolio, cash balance, net value
 * Pull market historical data
