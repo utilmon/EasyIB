@@ -63,3 +63,70 @@ Submitting an order
     ]
     
     api.submit_orders(list_of_orders)
+
+
+Reference
+-------------
+REST
+^^^^^
+By default, EasyIB assumes the gateway session is open at "https://localhost:5000" withtout a SSL certificate. A custom url and SSL certificate can be set by:
+
+.. code-block:: python
+
+    api = easyib.REST(url="https://localhost:5000", ssl=False)
+
+API REST Methods
+^^^^^^^^^^^^^^^^^
+.. list-table:: Title
+   :widths: 50 50 25
+   :header-rows: 1
+
+   * - REST Method
+     - End Point
+     - Result
+   * - ``get_account()``
+     - ``Get portfolio/accounts``
+     - ``list``
+   * - ``switch_account(accountId: str)``
+     - ``Post iserver/account/{accoutId}``
+     - ``dict``
+   * - ``get_cash()``
+     - ``Get portfolio/{accountId}/ledger``
+     - ``float``
+   * - ``get_netvalue()``
+     - ``Get portfolio/{accountId}/ledger``
+     - ``float``
+   * - ``get_conid(symbol: str)``
+     - ``Get trsv/stocks``
+     - ``int``
+   * - ``get_portfolio()``
+     - ``Get portfolio/{accountId}/positions/0``
+     - ``dict``
+  
+   * - ``reply_yes(id: str)``
+     - ``Post iserver/reply/{id}``
+     - ``dict``
+
+   * - ``submit_orders(list_of_orders: list, reply_yes=True)``
+     - ``Post iserver/account/{acountId}/orders``
+     - ``dict``
+
+   * - ``get_order(orderId: str)``
+     - ``Get iserver/account/order/satus/``
+     - ``dict``
+
+   * - ``get_live_orders(filters=[])``
+     - ``Get iserver/account/orders``
+     - ``dict``
+
+   * - ``cancel_order(orderId: str)``
+     - ``Delete iserver/account/{accountId}/order/{orderId}``
+     - ``dict``
+
+   * - ``modify_order(orderId=None, order=None, reply_yes=True)``
+     - ``Post iserver/account/{accountId}/order/{orderId}``
+     - ``dict``
+
+   * - ``get_bars(symbol: str, period="1w", bar="1d", outsideRth=False)``
+     - ``Get iserver/marketdata/history``
+     - ``dict``
