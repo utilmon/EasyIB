@@ -27,7 +27,7 @@ import easyib
 
 api = easyib.REST()
 # By default, easyib assumes the gateway session is at lcal port 5000 without a ssl certificate
-# A custom port may be set by easyib.REST(url="https://localhost:5000", ssl=False)
+# A custom port may be set by `api = easyib.REST(url="https://localhost:5000", ssl=False)`
 
 bars = api.get_bars("AAPL", period="1w", bar="1d")
 print(bars)
