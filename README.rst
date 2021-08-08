@@ -79,7 +79,7 @@ By default, EasyIB assumes the gateway session is open at https://localhost:5000
 
 API REST Methods
 ^^^^^^^^^^^^^^^^^
-.. list-table:: Title
+.. list-table:: 
    :widths: 50 50 25
    :header-rows: 1
 
