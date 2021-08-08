@@ -38,6 +38,7 @@ A custom package such as `Voyz/IBeam <https://github.com/voyz/ibeam>`__ can be a
 Quick start
 ------------
 Historical data
+^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
@@ -49,6 +50,7 @@ Historical data
     print(bars)
 
 Submitting an order
+^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
