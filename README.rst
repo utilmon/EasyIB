@@ -134,3 +134,17 @@ See the official documentation of the End Point at https://www.interactivebroker
    * - ``get_bars(symbol: str, period="1w", bar="1d", outsideRth=False)``
      - ``Get iserver/marketdata/history``
      - ``dict``
+
+   * - ``ping_server()``
+     - ``Post tickle``
+     - ``dict``
+   * - ``get_auth_status()``
+     - ``Post iserver/auth/status``
+     - ``dict``
+   * - ``re_authenticate()``
+     - ``Post iserver/reauthenticate``
+     - ``None``
+   * - ``log_out()``
+     - ``Post logout``
+     - ``None``
+
