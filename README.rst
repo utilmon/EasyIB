@@ -91,7 +91,7 @@ API REST Methods
 ^^^^^^^^^^^^^^^^^
 Documentation of available functions are at https://easyib.readthedocs.io/en/latest/reference.html.
 
-See the official documentation of the End Point at https://www.interactivebrokers.com/api/doc.html
+See the official documentation of the End Point at https://www.interactivebrokers.com/api/doc.html.
 
 .. list-table:: 
    :widths: 50 50 25
