@@ -233,14 +233,12 @@ class REST:
         return response.json()
 
     def re_authenticate(self) -> None:
-        """Attempts to re-authenticate when authentication is lost
-        """
+        """Attempts to re-authenticate when authentication is lost"""
         response = requests.post(self.url + "iserver/reauthenticate", verify=self.ssl)
         print("Reauthenticating ...")
 
     def log_out(self) -> None:
-        """Log out from the gateway session
-        """
+        """Log out from the gateway session"""
         response = requests.post(self.url + "logout", verify=self.ssl)
 
     def get_bars(self, symbol: str, period="1w", bar="1d", outsideRth=False) -> dict:
