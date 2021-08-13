@@ -15,7 +15,7 @@ EasyIB: Python Wrapper for Interactive Brokers API
 |
 |   EasyIB is an unofficial python wrapper for `Interactive Brokers Client Portal Web API <https://interactivebrokers.github.io/cpwebapi/>`__. Motivation to the project was to build a Python wrapper that can run on linux/cloud environments. Thus, Client Portal API was preferred over Trader Workstation (TWS) API.
 
-Please see https://easyib.readthedocs.io/en/latest/?badge=latest for the full documentation.
+Please see https://easyib.readthedocs.io for the full documentation.
 
 Features
 ---------
