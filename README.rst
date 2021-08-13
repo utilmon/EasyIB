@@ -1,4 +1,4 @@
-EasyIB: Unofficial Wrapper for Interactive Brokers API
+EasyIB: Python Wrapper for Interactive Brokers API
 ======================================================
 
 .. image:: https://img.shields.io/pypi/v/easyib
@@ -13,7 +13,7 @@ EasyIB: Unofficial Wrapper for Interactive Brokers API
 
 
 |
-|   EasyIB is an unofficial python wrapper for `Interactive Brokers Client Portal Web API <https://interactivebrokers.github.io/cpwebapi/>`__.
+|   EasyIB is an unofficial python wrapper for `Interactive Brokers Client Portal Web API <https://interactivebrokers.github.io/cpwebapi/>`__. Motivations to the project was to build a Python wrapper that can run on linux/cloud environments. Thus, Client Portal API was preferred over Trader Workstation (TWS) API.
 
 Features
 ---------
@@ -27,13 +27,19 @@ Notable functionality includes:
 
 How to install
 --------------
-.. code-block:: bash
-
-    pip install easyib
 
 EasyIB assumes a gateway session is active and authenticated.
 Follow instructions at https://interactivebrokers.github.io/cpwebapi/ for authentication.
 A custom package such as `Voyz/IBeam <https://github.com/voyz/ibeam>`__ can be also used for setting up an active session.
+Part Time Larry has an excellent youtube tutorial on this topic: https://www.youtube.com/watch?v=O1OhiiCx6Ho.
+
+EasyIB was developed under the Voyz/Ibeam docker image environment.
+
+Once a gateway session is running, ``pip`` command can be used to install EasyIB:
+
+.. code-block:: bash
+
+    pip install easyib
 
 Quick start
 ------------
