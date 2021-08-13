@@ -160,10 +160,10 @@ class REST:
         )
         return response.json()
 
-    def get_live_orders(self, filters=[]) -> dict:
+    def get_live_orders(self, filters: list = []) -> dict:
         """Returns list of live orders
 
-        :param filters: Filters for the returning response. Available items -- "inactive" "pending_submit" "pre_submitted" "submitted" "filled" "pending_cancel" "cancelled" "warn_state" "sort_by_time", defaults to []
+        :param filters: List of filters for the returning response. Available items -- "inactive" "pending_submit" "pre_submitted" "submitted" "filled" "pending_cancel" "cancelled" "warn_state" "sort_by_time", defaults to []
         :type filters: list, optional
         :return: list of live orders
         :rtype: dict
