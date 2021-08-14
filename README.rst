@@ -72,7 +72,8 @@ Submitting an order
         }
     ]
     
-    api.submit_orders(list_of_orders)
+    order = api.submit_orders(list_of_orders)
+    print(order)
 
 
 Reference
