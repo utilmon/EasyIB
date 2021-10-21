@@ -241,7 +241,14 @@ class REST:
         """Log out from the gateway session"""
         response = requests.post(self.url + "logout", verify=self.ssl)
 
-    def get_bars(self, symbol: str, period="1w", bar="1d", outsideRth=False) -> dict:
+    def get_bars(
+        self,
+        symbol: str,
+        period="1w",
+        bar="1d",
+        outsideRth=False,
+        conid: str or int = "default",
+    ) -> dict:
         """Returns market history for the given instrument
 
         :param symbol: Symbol of the instrument
@@ -252,11 +259,16 @@ class REST:
         :type bar: str, optional
         :param outsideRth: For contracts that support it, will determine if historical data includes outside of regular trading hours., defaults to False
         :type outsideRth: bool, optional
+        :param conid: conid should be provided separately for future and option securities. If not provided, it is assumed to be a stock.
+        :type conid: str or int, optional
         :return: Response from the server
         :rtype: dict
         """
+        if conid == "default":
+            conid = self.get_conid(symbol)
+
         query = {
-            "conid": self.get_conid(symbol),
+            "conid": conid,
             "period": period,
             "bar": bar,
             "outsideRth": outsideRth,
