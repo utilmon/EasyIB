@@ -70,9 +70,9 @@ class REST:
         return response.json()["USD"]["netliquidationvalue"]
 
     def get_conid(self, symbol: str) -> int:
-        """Returns contract id of the given instrument
+        """Returns contract id of the given stock instrument
 
-        :param symbol: Symbol of the instrument
+        :param symbol: Symbol of the stock instrument
         :type symbol: str
         :return: contract id
         :rtype: int
@@ -249,9 +249,9 @@ class REST:
         outsideRth=False,
         conid: str or int = "default",
     ) -> dict:
-        """Returns market history for the given instrument
+        """Returns market history for the given instrument. conid should be provided for futures and options.
 
-        :param symbol: Symbol of the instrument
+        :param symbol: Symbol of the stock instrument
         :type symbol: str
         :param period: Period for the history, available time period-- {1-30}min, {1-8}h, {1-1000}d, {1-792}w, {1-182}m, {1-15}y, defaults to "1w"
         :type period: str, optional
@@ -259,7 +259,7 @@ class REST:
         :type bar: str, optional
         :param outsideRth: For contracts that support it, will determine if historical data includes outside of regular trading hours., defaults to False
         :type outsideRth: bool, optional
-        :param conid: conid should be provided separately for future and option securities. If not provided, it is assumed to be a stock.
+        :param conid: conid should be provided separately for futures or options. If not provided, it is assumed to be a stock.
         :type conid: str or int, optional
         :return: Response from the server
         :rtype: dict
@@ -268,7 +268,7 @@ class REST:
             conid = self.get_conid(symbol)
 
         query = {
-            "conid": conid,
+            "conid": int(conid),
             "period": period,
             "bar": bar,
             "outsideRth": outsideRth,
