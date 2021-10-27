@@ -279,6 +279,13 @@ class REST:
         return response.json()
 
     def get_fut_conids(self, symbol: str) -> list:
+        """Returns list of contract id objects of a future instrument.
+
+        :param symbol: symbol of a future instrument
+        :type symbol: str
+        :return: list of contract id objects
+        :rtype: list
+        """
         query = {"symbols": symbol}
         response = requests.get(
             self.url + "trsrv/futures", params=query, verify=self.ssl
