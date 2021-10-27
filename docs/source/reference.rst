@@ -17,6 +17,7 @@ Account info
 Instrument info
 -----------------
 .. automethod:: REST.get_conid
+.. automethod:: REST.get_fut_conids
 .. automethod:: REST.get_bars
 
 

@@ -116,6 +116,9 @@ See the official documentation of the End Point at https://www.interactivebroker
    * - ``get_conid(symbol: str)``
      - ``Get trsv/stocks``
      - ``int``
+   * - ``get_fut_conids(symbol: str)``
+     - ``Get trsv/futures``
+     - ``list``
    * - ``get_portfolio()``
      - ``Get portfolio/{accountId}/positions/0``
      - ``dict``
@@ -144,7 +147,7 @@ See the official documentation of the End Point at https://www.interactivebroker
      - ``Post iserver/account/{accountId}/order/{orderId}``
      - ``dict``
 
-   * - ``get_bars(symbol: str, period="1w", bar="1d", outsideRth=False)``
+   * - ``get_bars(symbol: str, period="1w", bar="1d", outsideRth=False, conid="default")``
      - ``Get iserver/marketdata/history``
      - ``dict``
 

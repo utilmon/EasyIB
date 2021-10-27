@@ -278,6 +278,13 @@ class REST:
         )
         return response.json()
 
+    def get_fut_conids(self, symbol: str) -> list:
+        query = {"symbols": symbol}
+        response = requests.get(
+            self.url + "trsrv/futures", params=query, verify=self.ssl
+        )
+        return response.json()['symbol']
+
 
 if __name__ == "__main__":
 
