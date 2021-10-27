@@ -283,7 +283,7 @@ class REST:
         response = requests.get(
             self.url + "trsrv/futures", params=query, verify=self.ssl
         )
-        return response.json()['symbol']
+        return response.json()[symbol]
 
 
 if __name__ == "__main__":
