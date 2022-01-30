@@ -13,7 +13,7 @@ EasyIB: Python Wrapper for Interactive Brokers API
 
 
 |
-|   EasyIB is an unofficial python wrapper for `Interactive Brokers Client Portal Web API <https://interactivebrokers.github.io/cpwebapi/>`__. Motivation to the project was to build a Python wrapper that can run on linux/cloud environments. Thus, Client Portal API was preferred over Trader Workstation (TWS) API.
+|   EasyIB is an unofficial python wrapper for `Interactive Brokers Client Portal Web API <https://interactivebrokers.github.io/cpwebapi/>`__. The motivation for the project was to build a Python wrapper that can run on linux/cloud environments. Thus, Client Portal API was preferred over Trader Workstation (TWS) API.
 
 Please see https://easyib.readthedocs.io for the full documentation.
 
@@ -21,8 +21,8 @@ Features
 ---------
 Notable functionality includes:
 
-* Pull account info, portfolio, cash balance, net value
-* Pull market historical data
+* Pull account info, portfolio, cash balance, the net value
+* Pull historical market data
 * Submit, modify, cancel orders
 * Get order status, list of live orders
 * Ping (tickle) server, get authentication status, re-authenticate
@@ -32,7 +32,7 @@ How to install
 
 EasyIB assumes a gateway session is active and authenticated.
 Follow instructions at https://interactivebrokers.github.io/cpwebapi/ for authentication.
-A custom package such as `Voyz/IBeam <https://github.com/voyz/ibeam>`__ can be also used for setting up an active session.
+A custom package such as `Voyz/IBeam <https://github.com/voyz/ibeam>`__ can also be used for setting up an active session.
 Part Time Larry has an excellent youtube tutorial on this topic: https://www.youtube.com/watch?v=O1OhiiCx6Ho.
 
 EasyIB was developed under the Voyz/Ibeam docker image environment.
@@ -78,11 +78,11 @@ Submitting an order
 
 Reference
 -------------
-For the full reference, please visit https://easyib.readthedocs.io/en/latest/reference.html.
+For the complete reference, please visit https://easyib.readthedocs.io/en/latest/reference.html.
 
 REST
 ^^^^^
-By default, EasyIB assumes the gateway session is open at https://localhost:5000 withtout a SSL certificate. A custom url and SSL certificate can be set by:
+By default, EasyIB assumes the gateway session is open at https://localhost:5000 without an SSL certificate. A custom URL and SSL certificate can be set by:
 
 .. code-block:: python
 
@@ -90,7 +90,7 @@ By default, EasyIB assumes the gateway session is open at https://localhost:5000
 
 API REST Methods
 ^^^^^^^^^^^^^^^^^
-Documentation of available functions are at https://easyib.readthedocs.io/en/latest/reference.html.
+Documentation of available functions is at https://easyib.readthedocs.io/en/latest/reference.html.
 
 See the official documentation of the End Point at https://www.interactivebrokers.com/api/doc.html.
 
