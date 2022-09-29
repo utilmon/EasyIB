@@ -11,6 +11,13 @@ EasyIB: Python Wrapper for Interactive Brokers API
     :target: https://easyib.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
+|
+
+.. figure:: docs/logo.png
+    :width: 400
+    :align: center
+    
+    "Logo for 'EasyIB'" according to Midjourney
 
 |
 |   EasyIB is an unofficial python wrapper for `Interactive Brokers Client Portal Web API <https://interactivebrokers.github.io/cpwebapi/>`__. The motivation for the project was to build a Python wrapper that can run on Linux/cloud environments. Thus, Client Portal API was preferred over Trader Workstation (TWS) API.
@@ -52,9 +59,9 @@ Historical data
 
     import easyib
 
-    api = easyib.REST()
+    ib = easyib.REST()
 
-    bars = api.get_bars("AAPL", period="1w", bar="1d")
+    bars = ib.get_bars("AAPL", period="1w", bar="1d")
     print(bars)
 
 Submitting an order
@@ -64,7 +71,7 @@ Submitting an order
 
     list_of_orders = [
         {
-            "conid": api.get_conid("AAPL"),
+            "conid": ib.get_conid("AAPL"),
             "orderType": "MKT",
             "side": "BUY",
             "quantity": 7,
@@ -72,7 +79,7 @@ Submitting an order
         }
     ]
     
-    order = api.submit_orders(list_of_orders)
+    order = ib.submit_orders(list_of_orders)
     print(order)
 
 
@@ -86,7 +93,7 @@ By default, EasyIB assumes the gateway session is open at https://localhost:5000
 
 .. code-block:: python
 
-    api = easyib.REST(url="https://localhost:5000", ssl=False)
+    ib = easyib.REST(url="https://localhost:5000", ssl=False)
 
 API REST Methods
 ^^^^^^^^^^^^^^^^^
