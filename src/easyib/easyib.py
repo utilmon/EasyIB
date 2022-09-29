@@ -314,7 +314,7 @@ if __name__ == "__main__":
     # print(api.get_portfolio())
     # print(api.re_authenticate())
     # print(api.get_auth_status())
-    print(api.get_live_orders())
+    # print(api.get_live_orders())
     # print(api.get_bars("TSLA"))
     # print(api.get_conid("AAPL"))
     # print(api.cancel_order(2027388848))
