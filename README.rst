@@ -13,7 +13,7 @@ EasyIB: Python Wrapper for Interactive Brokers API
 
 |
 
-.. figure:: docs/logo.png
+.. image:: https://raw.githubusercontent.com/ashpipe/EasyIB/main/docs/logo.png
     :width: 400
     :align: center
     
