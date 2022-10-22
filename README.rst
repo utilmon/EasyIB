@@ -112,7 +112,7 @@ See the official documentation of the End Point at https://www.interactivebroker
      - ``Get portfolio/accounts``
      - ``list``
    * - ``switch_account(accountId: str)``
-     - ``Post iserver/account/{accoutId}``
+     - ``Post iserver/account/{accountId}``
      - ``dict``
    * - ``get_cash()``
      - ``Get portfolio/{accountId}/ledger``
