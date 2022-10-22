@@ -19,7 +19,7 @@ class REST:
         :param ssl: Usage of SSL certificate, defaults to False
         :type ssl: bool, optional
         """
-        self.url = url + "/v1/api/"
+        self.url = f"{url}/v1/api/"
         self.ssl = ssl
         self.id = self.get_accounts()[0]["accountId"]
 
@@ -29,7 +29,7 @@ class REST:
         :return: list of account info
         :rtype: list
         """
-        response = requests.get(self.url + "portfolio/accounts", verify=self.ssl)
+        response = requests.get(f"{self.url}portfolio/accounts", verify=self.ssl)
         return response.json()
 
     def switch_account(self, accountId: str) -> dict:
@@ -41,8 +41,9 @@ class REST:
         :rtype: dict
         """
         response = requests.post(
-            self.url + "iserver/account", json={"acctId": accountId}, verify=self.ssl
+            f"{self.url}iserver/account", json={"acctId": accountId}, verify=self.ssl
         )
+
         self.id = accountId
         return response.json()
 
@@ -53,9 +54,9 @@ class REST:
         :rtype: float
         """
         response = requests.get(
-            self.url + "portfolio/" + self.id + "/ledger",
-            verify=self.ssl,
+            f"{self.url}portfolio/{self.id}/ledger", verify=self.ssl
         )
+
         return response.json()["USD"]["cashbalance"]
 
     def get_netvalue(self) -> float:
@@ -65,12 +66,17 @@ class REST:
         :rtype: float
         """
         response = requests.get(
-            self.url + "portfolio/" + self.id + "/ledger",
-            verify=self.ssl,
+            f"{self.url}portfolio/{self.id}/ledger", verify=self.ssl
         )
+
         return response.json()["USD"]["netliquidationvalue"]
 
-    def get_conid(self, symbol: str, instrument_filters: Dict = None, contract_filters: Dict = None) -> int:
+    def get_conid(
+        self,
+        symbol: str,
+        instrument_filters: Dict = None,
+        contract_filters: Dict = None,
+    ) -> int:
         """Returns contract id of the given stock instrument
 
         :param symbol: Symbol of the stock instrument
@@ -84,14 +90,21 @@ class REST:
         """
         query = {"symbols": symbol}
         response = requests.get(
-            self.url + "trsrv/stocks", params=query, verify=self.ssl
+            f"{self.url}trsrv/stocks", params=query, verify=self.ssl
         )
+
         dic = response.json()
-        
+
         if instrument_filters or contract_filters:
+
             def filter_instrument(instrument: Dict) -> bool:
                 def apply_filters(x: Dict, filters: Dict) -> list:
-                    positives = list(filter(lambda x: x, [x.get(key) == val for key, val in filters.items()]))
+                    positives = list(
+                        filter(
+                            lambda x: x,
+                            [x.get(key) == val for key, val in filters.items()],
+                        )
+                    )
                     return len(positives) == len(filters)
 
                 if instrument_filters:
@@ -101,7 +114,12 @@ class REST:
                         return False
 
                 if contract_filters:
-                    instrument["contracts"] = list(filter(lambda x: apply_filters(x, contract_filters), instrument["contracts"]))
+                    instrument["contracts"] = list(
+                        filter(
+                            lambda x: apply_filters(x, contract_filters),
+                            instrument["contracts"],
+                        )
+                    )
 
                 return len(instrument["contracts"]) > 0
 
@@ -116,13 +134,11 @@ class REST:
         :rtype: dict
         """
         response = requests.get(
-            self.url + "portfolio/" + self.id + "/positions/0",
-            verify=self.ssl,
+            f"{self.url}portfolio/{self.id}/positions/0", verify=self.ssl
         )
-        dic = {}
-        for item in response.json():
-            dic.update({item["contractDesc"]: item["position"]})
-        dic.update({"USD": self.get_cash()})  # Cash balance
+
+        dic = {item["contractDesc"]: item["position"] for item in response.json()}
+        dic["USD"] = self.get_cash()
         return dic
 
     def reply_yes(self, id: str) -> dict:
@@ -137,10 +153,9 @@ class REST:
 
         answer = {"confirmed": True}
         response = requests.post(
-            self.url + "iserver/reply/" + id,
-            json=answer,
-            verify=self.ssl,
+            f"{self.url}iserver/reply/{id}", json=answer, verify=self.ssl
         )
+
         return response.json()[0]
 
     def _reply_all_yes(self, response, reply_yes_to_all: bool) -> dict:
@@ -166,10 +181,11 @@ class REST:
         :rtype: dict
         """
         response = requests.post(
-            self.url + "iserver/account/" + self.id + "/orders",
+            f"{self.url}iserver/account/{self.id}/orders",
             json={"orders": list_of_orders},
             verify=self.ssl,
         )
+
         return self._reply_all_yes(response, reply_yes)
 
     def get_order(self, orderId: str) -> dict:
@@ -181,11 +197,12 @@ class REST:
         :rtype: dict
         """
         response = requests.get(
-            self.url + "iserver/account/order/status/" + str(orderId), verify=self.ssl
+            f"{self.url}iserver/account/order/status/{orderId}", verify=self.ssl
         )
+
         return response.json()
 
-    def get_live_orders(self, filters: list = []) -> dict:
+    def get_live_orders(self, filters: list = None) -> dict:
         """Returns list of live orders
 
         :param filters: List of filters for the returning response. Available items -- "inactive" "pending_submit" "pre_submitted" "submitted" "filled" "pending_cancel" "cancelled" "warn_state" "sort_by_time", defaults to []
@@ -193,11 +210,14 @@ class REST:
         :return: list of live orders
         :rtype: dict
         """
+        if filters is None:
+            filters = []
         response = requests.get(
-            self.url + "iserver/account/orders",
+            f"{self.url}iserver/account/orders",
             params={"filters": filters},
             verify=self.ssl,
         )
+
         return response.json()
 
     def cancel_order(self, orderId: str) -> dict:
@@ -209,9 +229,9 @@ class REST:
         :rtype: dict
         """
         response = requests.delete(
-            self.url + "iserver/account/" + self.id + "/order/" + str(orderId),
-            verify=self.ssl,
+            f"{self.url}iserver/account/{self.id}/order/{orderId}", verify=self.ssl
         )
+
         return response.json()
 
     def modify_order(
@@ -233,10 +253,11 @@ class REST:
         ), "Input parameters (orderId or order) are missing"
 
         response = requests.post(
-            self.url + "iserver/account/" + self.id + "/order/" + str(orderId),
+            f"{self.url}iserver/account/{self.id}/order/{orderId}",
             json=order,
             verify=self.ssl,
         )
+
         return self._reply_all_yes(response, reply_yes)
 
     def ping_server(self) -> dict:
@@ -245,7 +266,7 @@ class REST:
         :return: Response from the server
         :rtype: dict
         """
-        response = requests.post(self.url + "tickle", verify=self.ssl)
+        response = requests.post(f"{self.url}tickle", verify=self.ssl)
         return response.json()
 
     def get_auth_status(self) -> dict:
@@ -254,17 +275,17 @@ class REST:
         :return: Status dictionary
         :rtype: dict
         """
-        response = requests.post(self.url + "iserver/auth/status", verify=self.ssl)
+        response = requests.post(f"{self.url}iserver/auth/status", verify=self.ssl)
         return response.json()
 
     def re_authenticate(self) -> None:
         """Attempts to re-authenticate when authentication is lost"""
-        response = requests.post(self.url + "iserver/reauthenticate", verify=self.ssl)
+        requests.post(f"{self.url}iserver/reauthenticate", verify=self.ssl)
         print("Reauthenticating ...")
 
     def log_out(self) -> None:
         """Log out from the gateway session"""
-        response = requests.post(self.url + "logout", verify=self.ssl)
+        requests.post(f"{self.url}logout", verify=self.ssl)
 
     def get_bars(
         self,
@@ -299,8 +320,9 @@ class REST:
             "outsideRth": outsideRth,
         }
         response = requests.get(
-            self.url + "iserver/marketdata/history", params=query, verify=self.ssl
+            f"{self.url}iserver/marketdata/history", params=query, verify=self.ssl
         )
+
         return response.json()
 
     def get_fut_conids(self, symbol: str) -> list:
@@ -313,8 +335,9 @@ class REST:
         """
         query = {"symbols": symbol}
         response = requests.get(
-            self.url + "trsrv/futures", params=query, verify=self.ssl
+            f"{self.url}trsrv/futures", params=query, verify=self.ssl
         )
+
         return response.json()[symbol]
 
 
