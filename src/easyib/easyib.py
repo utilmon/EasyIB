@@ -70,12 +70,15 @@ class REST:
         )
         return response.json()["USD"]["netliquidationvalue"]
 
-    def get_conid(self, symbol: str, contract_filters: Dict = None) -> int:
+    def get_conid(self, symbol: str, instrument_filters: Dict = None, contract_filters: Dict = None) -> int:
         """Returns contract id of the given stock instrument
 
         :param symbol: Symbol of the stock instrument
-        :param contract_filters: Key-value pair of filters to use on the returned contract data
         :type symbol: str
+        :param instrument_filters: Key-value pair of filters to use on the returned instrument data
+        :type instrument_filters: Dict, optional
+        :param contract_filters: Key-value pair of filters to use on the returned contract data
+        :type contract_filters: Dict, optional
         :return: contract id
         :rtype: int
         """
@@ -85,14 +88,22 @@ class REST:
         )
         dic = response.json()
         
-        if contract_filters:
+        if instrument_filters or contract_filters:
             def filter_instrument(instrument: Dict) -> bool:
-                def filter_contracts(x: Dict) -> list:
-                    return list(filter(lambda x: x, [x.get(key) == val for key, val in contract_filters.items()]))
+                def apply_filters(x: Dict, filters: Dict) -> list:
+                    positives = list(filter(lambda x: x, [x.get(key) == val for key, val in filters.items()]))
+                    return len(positives) == len(filters)
 
-                instrument["contracts"] = list(filter(filter_contracts, instrument["contracts"]))
+                if instrument_filters:
+                    valid = apply_filters(instrument, instrument_filters)
 
-                return len(instrument["contracts"]) > 0                
+                    if not valid:
+                        return False
+
+                if contract_filters:
+                    instrument["contracts"] = list(filter(lambda x: apply_filters(x, contract_filters), instrument["contracts"]))
+
+                return len(instrument["contracts"]) > 0
 
             dic[symbol] = list(filter(filter_instrument, dic[symbol]))
 
@@ -331,5 +342,6 @@ if __name__ == "__main__":
     # print(api.get_live_orders())
     # print(api.get_bars("TSLA"))
     # print(api.get_conid("AAPL"))
-    # print(api.get_conid("MUB", contract_filters={'isUS': True, 'exchange': 'ARCA'}))
+    # print(api.get_conid("MUB", contract_filters={"isUS": True, "exchange": "ARCA"}))
+    # print(api.get_conid("MUB", instrument_filters={"name": "ISHARES NATIONAL MUNI BOND E", "assetClass": "STK"}))
     # print(api.cancel_order(2027388848))
