@@ -142,7 +142,7 @@ See the official documentation of the End Point at https://www.interactivebroker
      - ``Get iserver/account/order/satus/``
      - ``dict``
 
-   * - ``get_live_orders(filters=[])``
+   * - ``get_live_orders(filters=None)``
      - ``Get iserver/account/orders``
      - ``dict``
 
