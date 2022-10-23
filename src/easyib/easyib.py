@@ -81,9 +81,9 @@ class REST:
 
         :param symbol: Symbol of the stock instrument
         :type symbol: str
-        :param instrument_filters: Key-value pair of filters to use on the returned instrument data
+        :param instrument_filters: Key-value pair of filters to use on the returned instrument data, e.g) {"isUS": True, "exchange": "ARCA"}
         :type instrument_filters: Dict, optional
-        :param contract_filters: Key-value pair of filters to use on the returned contract data
+        :param contract_filters: Key-value pair of filters to use on the returned contract data, e.g) {"isUS": True, "exchange": "ARCA"}
         :type contract_filters: Dict, optional
         :return: contract id
         :rtype: int
