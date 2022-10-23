@@ -75,13 +75,13 @@ class REST:
         self,
         symbol: str,
         instrument_filters: Dict = None,
-        contract_filters: Dict = None,
+        contract_filters: Dict = {"isUS": True},
     ) -> int:
         """Returns contract id of the given stock instrument
 
         :param symbol: Symbol of the stock instrument
         :type symbol: str
-        :param instrument_filters: Key-value pair of filters to use on the returned instrument data, e.g) {"isUS": True, "exchange": "ARCA"}
+        :param instrument_filters: Key-value pair of filters to use on the returned instrument data, e.g) {"name": "ISHARES NATIONAL MUNI BOND E", "assetClass": "STK"}
         :type instrument_filters: Dict, optional
         :param contract_filters: Key-value pair of filters to use on the returned contract data, e.g) {"isUS": True, "exchange": "ARCA"}
         :type contract_filters: Dict, optional
