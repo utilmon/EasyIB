@@ -120,7 +120,7 @@ See the official documentation of the End Point at https://www.interactivebroker
    * - ``get_netvalue()``
      - ``Get portfolio/{accountId}/ledger``
      - ``float``
-   * - ``get_conid(symbol: str, instrument_filters: Dict, contract_filters: Dict = {"isUS": True})``
+   * - ``get_conid(symbol: str, instrument_filters: Dict = None, contract_filters: Dict = {"isUS": True})``
      - ``Get trsv/stocks``
      - ``int``
    * - ``get_fut_conids(symbol: str)``
