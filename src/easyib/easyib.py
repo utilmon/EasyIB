@@ -1,5 +1,4 @@
 import requests
-from typing import Dict
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -76,8 +75,8 @@ class REST:
     def get_conid(
         self,
         symbol: str,
-        instrument_filters: Dict = None,
-        contract_filters: Dict = {"isUS": True},
+        instrument_filters: dict = None,
+        contract_filters: dict = {"isUS": True},
     ) -> int:
         """Returns contract id of the given stock instrument
 
@@ -99,8 +98,8 @@ class REST:
 
         if instrument_filters or contract_filters:
 
-            def filter_instrument(instrument: Dict) -> bool:
-                def apply_filters(x: Dict, filters: Dict) -> list:
+            def filter_instrument(instrument: dict) -> bool:
+                def apply_filters(x: dict, filters: dict) -> list:
                     positives = list(
                         filter(
                             lambda x: x,
