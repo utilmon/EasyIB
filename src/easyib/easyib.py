@@ -1,6 +1,9 @@
 import requests
 import urllib3
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+urllib3.disable_warnings(
+    urllib3.exceptions.InsecureRequestWarning
+)  # disable ssl warning
 
 
 class REST:
