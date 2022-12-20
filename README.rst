@@ -59,7 +59,7 @@ Historical data
 
     import easyib
 
-    ib = easyib.REST()
+    ib = easyib.REST() # default parameters: url="https://localhost:5000", ssl=False
 
     bars = ib.get_bars("AAPL", period="1w", bar="1d")
     print(bars)
