@@ -190,7 +190,7 @@ class REST:
             verify=self.ssl,
         )
 
-        assert response.status_code != 401, response.json()
+        assert response.status_code == 200, response.json()
 
         return self._reply_all_yes(response, reply_yes)
 
