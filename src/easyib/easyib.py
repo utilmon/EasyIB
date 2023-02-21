@@ -190,6 +190,8 @@ class REST:
             verify=self.ssl,
         )
 
+        assert response.status_code != 401, response.json()
+
         return self._reply_all_yes(response, reply_yes)
 
     def get_order(self, orderId: str) -> dict:
