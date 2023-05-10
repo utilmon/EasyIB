@@ -42,8 +42,8 @@ Follow instructions at https://interactivebrokers.github.io/cpwebapi/ for authen
 A custom package such as `Voyz/IBeam <https://github.com/voyz/ibeam>`__ can also be used for setting up an active session.
 Part Time Larry has an excellent youtube tutorial on this topic: https://www.youtube.com/watch?v=O1OhiiCx6Ho.
 
-EasyIB was developed under the Voyz/Ibeam docker image environment.
-You can verify if a gateway session is active by typing `curl -X GET "https://localhost:5000/v1/api/one/user" -k` at bash terminal.
+EasyIB was developed under the `Voyz/IBeam <https://github.com/voyz/ibeam>`__ docker image environment.
+You can verify if a gateway session is active by typing ``curl -X GET "https://localhost:5000/v1/api/one/user" -k`` at bash terminal.
 
 Once a gateway session is running, ``pip`` command can be used to install EasyIB:
 
