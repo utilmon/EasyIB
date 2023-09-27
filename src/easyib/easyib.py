@@ -145,6 +145,36 @@ class REST:
         dic["USD"] = self.get_cash()
         return dic
 
+    def get_portfolio_paginated(self) -> dict:
+        """Returns portfolio of the selected account
+
+        :return: Portfolio
+        :rtype: dict
+        """
+
+        max_page_index = 100 # To avoid infinite loop
+        page_index = 0
+        dic = {}
+
+        while page_index < max_page_index:
+            response = requests.get(
+                f"{self.url}portfolio/{self.id}/positions/{page_index}",
+                verify=self.ssl,
+            )
+
+            if len(response.json()) == 0:
+                break
+
+            for item in response.json():
+                dic[item["contractDesc"]] = {
+                    "position": item["position"],
+                    "conid": item["conid"]
+                }
+
+            page_index += 1
+
+        return dic
+
     def reply_yes(self, id: str) -> dict:
         """
         Replies yes to a single message generated while submitting or modifying orders.
