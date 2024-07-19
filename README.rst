@@ -140,7 +140,7 @@ See the official documentation of the End Point at https://www.interactivebroker
      - ``dict``
 
    * - ``get_order(orderId: str)``
-     - ``Get iserver/account/order/satus/``
+     - ``Get iserver/account/order/status/``
      - ``dict``
 
    * - ``get_live_orders(filters=None)``
