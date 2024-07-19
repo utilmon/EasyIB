@@ -61,19 +61,19 @@ class REST:
             f"{self.url}portfolio/{self.id}/ledger", verify=self.ssl
         )
 
-        return response.json()["USD"]["cashbalance"]
+        return response.json()["BASE"]["cashbalance"]
 
     def get_netvalue(self) -> float:
         """Returns net value of the selected account
 
-        :return: Net value in USD
+        :return: Net value in BASE
         :rtype: float
         """
         response = requests.get(
             f"{self.url}portfolio/{self.id}/ledger", verify=self.ssl
         )
 
-        return response.json()["USD"]["netliquidationvalue"]
+        return response.json()["BASE"]["netliquidationvalue"]
 
     def get_conid(
         self,
@@ -142,7 +142,7 @@ class REST:
         )
 
         dic = {item["contractDesc"]: item["position"] for item in response.json()}
-        dic["USD"] = self.get_cash()
+        dic["BASE"] = self.get_cash()
         return dic
 
     def reply_yes(self, id: str) -> dict:
